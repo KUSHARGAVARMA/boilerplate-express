@@ -36,6 +36,27 @@ app.get('/json',(req,res)=>{
 
     }    
 })
+//chaining the middlewares 
+app.get('/now', function(req, res, next) {
+    req.time = new Date().toString();  // Hypothetical synchronous operation
+    next();
+  }, function(req, res) {
+    res.send({time:req.time});
+  });
 
+//parameters and fetch them  using req.params
+
+app.get('/:word/echo',(req,res)=>{
+word= req.params.word
+res.send({"echo":word})
+})
+
+//query and fetch them using req.query
+
+app.get('/name',(req,res)=>{
+    // firstname= req.query.first
+    // lastname=req.query.last
+    res.send({"name":`${req.query.first} ${req.query.last}`})
+})
 
  module.exports = app;

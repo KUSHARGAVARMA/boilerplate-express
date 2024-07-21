@@ -54,9 +54,9 @@ res.send({"echo":word})
 //query and fetch them using req.query
 
 app.get('/name',(req,res)=>{
-    // firstname= req.query.first
-    // lastname=req.query.last
-    res.send({"name":`${req.query.first} ${req.query.last}`})
+    firstname= req.query.first
+    lastname=req.query.last
+    res.send({"name":`${firstname} ${lastname}`})
 })
 
  module.exports = app;

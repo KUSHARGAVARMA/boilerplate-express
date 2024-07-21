@@ -1,11 +1,14 @@
+const bodyParser = require('body-parser');
 let express = require('express');
 let app = express();
 require('dotenv').config()
 
+
+
 pathToStaticFile = __dirname+"/public"
 pathToHtmlFile = __dirname+"/views/index.html"
 
-
+app.use(bodyParser.urlencoded({extended:false}))
 //middleware for all the methods printing the logs in manner method path - ip
 app.use((req,res,next)=>{
     console.log(req.method+" "+req.path+" "+"-"+" "+req.ip);
@@ -56,6 +59,11 @@ res.send({"echo":word})
 app.get('/name',(req,res)=>{
     firstname= req.query.first
     lastname=req.query.last
+    res.send({"name":`${firstname} ${lastname}`})
+})
+app.post('/name',(req,res)=>{
+    firstname= req.body.first
+    lastname=req.body.last
     res.send({"name":`${firstname} ${lastname}`})
 })
 
